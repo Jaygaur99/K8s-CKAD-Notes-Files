@@ -1,0 +1,23 @@
+# before this - 
+# kubectl create namespace dev
+# or
+# k apply -f ./namespace-dev.yml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  namespace: dev
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+
+
+# change context parmenently
+# k config set-context ${k config current-context) --namespace=dev
+# or temp via -n or --namespace
+# k get pods -n dev
