@@ -5,3 +5,6 @@ This repository contains all the files, code, and notes for the CKAD (Certified 
 **Note:** 
 - All the files and code are created by me.
 - The notes are generated via AI (cuz I'm lazy!).
+
+## Alias used by me
+alias k=kubectl
