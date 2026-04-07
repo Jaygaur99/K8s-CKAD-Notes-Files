@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30008
+  selector:
+    app: myapp
+    type: front-end
+
+
+# NOTE: In the video, it is mentioned that we can access the node port at the
+# nodePort address, although, if we are using kind then docker
+# doesn't allow ports to be reachable directly, we need to explicitely allow
+# it via:
+# kubectl port-forward svc/myapp-service 8080:80
+# curl localhost:8080
