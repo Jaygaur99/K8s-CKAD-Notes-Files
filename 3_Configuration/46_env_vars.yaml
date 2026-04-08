@@ -1,0 +1,19 @@
+# docker run -e APP_COLOR=RED simple-webapp-color
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-webapp-color
+
+spec:
+  containers:
+    - name: simple-webapp-color
+      image: simple-webapp-color
+      ports: 
+        - containerPort: 80
+      env:
+        - name: APP_COLOR
+          value: RED      # <- Direct plain key
+          # valueFron:    # <- ConfigMap
+            # configMapKeyRef
+          # valueFrom:    # <- Secrets
+            # secretKeyRef

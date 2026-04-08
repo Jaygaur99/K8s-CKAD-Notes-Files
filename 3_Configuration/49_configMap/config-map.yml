@@ -1,0 +1,10 @@
+# k create -f ./config-map.yml
+# k create configmap <name> --from-literal=<key>=<value>
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_COLOR: blue 
+  APP_MODE: prod
