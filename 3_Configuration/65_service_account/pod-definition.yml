@@ -1,0 +1,12 @@
+# check service account before
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  containers:
+  - name: myapp
+    image: <Image>
+  serviceAccountName: dashboard-sa
