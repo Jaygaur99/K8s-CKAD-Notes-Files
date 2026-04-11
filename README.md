@@ -9,9 +9,9 @@ This repository contains all the files, code, and notes for the CKAD (Certified 
 
 ## Alias I use frequently
 
-alias k=kubectl
-alias kg="k get"
-alias kc="k create"
-alias kd="k delete"
-alias kdis="k describe"
-alias ka="k apply"
+    alias k=kubectl
+    alias kg="k get"
+    alias kc="k create"
+    alias kd="k delete"
+    alias kdis="k describe"
+    alias ka="k apply"
