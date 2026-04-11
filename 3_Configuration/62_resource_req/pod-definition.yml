@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-webapp-color
+  labels:
+    name: simple-webapp-color
+spec:
+  containers:
+  - name: simple-webapp-color
+    image: simple-webapp-color
+    ports:
+      - containerPort: 8080
+    resources:
+      requests:
+        memory: "4Gi"
+        cpu: 2
+      limits:
+        memory: "8Gi"
+        cpu: 4
+
+# cpu cant be exceeded but memory can and it cause OOM (out of memory) error
