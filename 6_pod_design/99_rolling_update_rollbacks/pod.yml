@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-webapp
+  labels:
+    app: App1
+    Function: Front-end
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: App2
+  template:
+    metadata:
+      labels:
+        app: App2
+        Function: Front-end
+    spec:
+      containers:
+      - name: simple-webapp
+        image: simple-webapp
+        ports:
+          - containerPort: 8080
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+    # OR Recreate

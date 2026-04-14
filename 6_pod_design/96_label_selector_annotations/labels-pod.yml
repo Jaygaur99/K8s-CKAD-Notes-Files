@@ -1,0 +1,16 @@
+# Get it vai k get pods --selector app=App1
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-webapp
+  # Labels
+  labels:
+    app: App1
+    Function: Front-end
+spec:
+  containers:
+  - name: simple-webapp
+    image: simple-webapp
+    ports:
+      - containerPort: 8080

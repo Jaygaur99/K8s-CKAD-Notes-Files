@@ -1,0 +1,32 @@
+# Get it vai k get pods --selector app=App1
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: simple-webapp
+  # replicaset Labels
+  labels:
+    app: App1
+    Function: Front-end
+  
+annotations:
+  buildversion: 1.34
+  
+spec:
+  replicas: 3
+  # Selector to connect pod to replicaset
+  selector:
+    matchLabels:
+      app: App2
+  template:
+    # Pod labels
+    metadata:
+      labels:
+        app: App2
+        Function: Front-end
+    spec:
+      containers:
+      - name: simple-webapp
+        image: simple-webapp
+        ports:
+          - containerPort: 8080
