@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-canary # <- change here
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  template:
+    metadata:
+      labels:
+        version: v2 # Change here
+        app: front-end # This remains the same
+    spec:
+      containers:
+      - name: app-container
+        image: iamge:2.0 # Change here
+  replicas: 1 # Keeping it 1 for less traffic
+  selector:
+    matchLabels:
+      app: front-end

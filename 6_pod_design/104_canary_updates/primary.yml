@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-primary
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  template:
+    metadata:
+      labels:
+        version: v1
+        app: front-end
+    spec:
+      containers:
+      - name: app-container
+        image: iamge:1.0
+  replicas: 5
+  selector:
+    matchLabels:
+      app: front-end
