@@ -1,0 +1,21 @@
+# its beta1 in vid, but that's old
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: reporting-cron-job
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      completions: 3
+      parallelism: 3
+      
+      template:
+        spec:
+          containers:
+          - name: reporting-tool
+            image: reporting-tool
+            
+          restartPolicy: Never
+# k create -f ./file.yml
+# k get cronjob

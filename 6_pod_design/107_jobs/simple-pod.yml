@@ -1,0 +1,16 @@
+# pods are different form docker one off containers that just exists, K8s
+# keep trying to recreate the pod even for one off pods like expr 3+2
+# (basically restart: always in docker)
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: math-pod
+spec:
+  containers:
+  - name: math-add
+    image: ubuntu
+    command: ["expr", "3", "+", "2"]
+
+  # Ro avoid it use
+  restartPolicy: Never
