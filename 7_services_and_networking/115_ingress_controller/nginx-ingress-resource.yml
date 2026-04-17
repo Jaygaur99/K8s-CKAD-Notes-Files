@@ -1,0 +1,64 @@
+# wear.yml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-wear
+
+spec:
+  defaultBackend:
+    service:
+      name: wear-service
+      port: 80
+    
+
+--- 
+# wear-watch.yml
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-wear-watch
+
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /wear
+        backend: 
+          service:
+            name: wear-service
+            port: 80
+
+      - path: /watch
+        backend: 
+          service:
+            name: watch-service
+            port: 80
+
+--- 
+# wear-watch-with-different-domains
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-wear-watch
+
+spec:
+  rules:
+  - host: wear.abc.com
+    http:
+      paths:
+      - path: /wear
+        backend: 
+          service:
+            name: wear-service
+            port: 80
+  - host: watch.abc.com
+    http:
+      paths:
+      - path: /watch
+        backend: 
+          service:
+            name: watch-service
+            port: 80
+
+---
