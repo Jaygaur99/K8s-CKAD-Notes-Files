@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  serviceName: mysql-h
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql
+  selector:
+    matchLabels:
+      app: mysql
+  
+  # Overwrite default OrderedReady of stateful sets
+  # podManagementPolicy: Parallel

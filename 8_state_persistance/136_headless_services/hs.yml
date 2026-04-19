@@ -1,0 +1,51 @@
+# HS
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-h
+spec:
+  selector:
+    app: mysql
+  ports:
+  - port: 3306
+  clusterIP: None
+
+
+--- 
+# accessing it in pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: mysql
+spec:
+  containers:
+  - name: mysql
+    image: mysql
+
+  subdomain: mysql-h # This is the same name in HS metadata
+  hostname: mysql-pod # This is also required
+
+---
+# OR in Stateful deployment
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql-deployment 
+  labels:
+    app: mysql
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql
+  serviceName: mysql-h
