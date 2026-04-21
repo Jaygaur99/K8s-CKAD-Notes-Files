@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Config
+current-context: dev-user@google
+clusters:
+- name: my-kube-playground
+  cluster:
+    server: https://my-kube-playground:6443
+    certificate-authority: /path/to/ca.crtz
+    # certificate-authority-data: <base64-encoded>
+# - name: development (values not written)
+# - name: production
+# - name: google
+    
+contexts:
+- name: my-kube-admin@my-kube-playground
+  context:
+    cluster: my-kube-playground
+    user: my-kube-admin
+  namespace: finance
+# - dev-user@google
+# - prod-user@production
+
+users:
+- name: my-kube-admin
+  user:
+    client-certificate: /path/to/admin.crt
+    client-key: /path/to/admin.key
+# - admin
+# - dev-user
+# - prod-user
