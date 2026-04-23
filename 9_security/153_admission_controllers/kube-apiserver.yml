@@ -1,0 +1,29 @@
+# list all enabled admission controllers
+# kube-apiserver -h | grep enable-admission-plugins
+# in kdm 
+# kubectl exec kube-apiserver-desktop-control-plane -n kube-system -- kube-apiserver -h | grep enable-admission-plugins
+
+# first enable it on kubeapi server
+# kube-apiserver 
+# --enable-admission-plugins=NodeRestriction,NamespaceAutoProvision
+# --others=${others} 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-apiserver
+  namespace: kube-system
+spec:
+  containers:
+  - name: kube-apiserver
+    image: k8s.gcr.io/kube-apiserver-amd64:v1.11.3
+    command: 
+    - kube-apiserver
+    - --authorization-mode=Node,RBAC
+    - --advertise-address=172.17.0.187
+    - --allow-privileged=true
+    - --enable-bootstrap-token-auth=true
+    - --enable-admission-plugins=NamespaceAutoProvision,NodeRestriction
+
+# NOTE: NamespaceAutoProvisioning` and `NamespaceExists` are deprecated and are replaced by
+# Namespace Lifecycle Admission controller which enforces rules like preventing deletion of critical default namespaces

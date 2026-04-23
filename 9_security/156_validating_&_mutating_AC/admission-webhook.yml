@@ -1,0 +1,21 @@
+# if this is being deployed with server inside a pod + service attached to it in cluster
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: "pod-policy.example.com"
+
+webhooks:
+  - name: "pod-policy.example.com"
+    clientConfig:
+      # if its outside
+      # url: "https://external-server.example.com"
+      service:
+        namespace: webhook-namespace
+        name: webhook-service
+      caBundle: "ci0tLS0tQk......tL50S"
+    rules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE"]
+        resources: ["pods"]
+        scope: "Namespaced"
