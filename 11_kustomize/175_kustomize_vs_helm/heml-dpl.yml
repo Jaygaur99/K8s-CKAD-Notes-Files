@@ -1,0 +1,42 @@
+# Deployment.yaml
+# Helm's go templeting
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+
+    spec: 
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "nginx:{{ .Values.image.tag }}"
+
+---
+
+# values.yaml
+replicaCount: 1
+
+image:
+  tag: "2.4.4"
+
+# Folder structure helm
+# k8s/
+# |--- environments/
+# |  |--- values.dev.yaml
+# |  |--- values.stg.yaml
+# |  |--- values.prod.yaml
+# |--- templates/
+#    |--- nginx-deployment.yaml
+#    |--- nginx-service.yaml
+#    |--- db-deployment.yaml
+#    |--- db-service.yaml
