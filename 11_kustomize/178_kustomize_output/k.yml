@@ -1,0 +1,20 @@
+# Just uses linux's pipe for passing commands
+
+# kustomize build k8s/ 
+# ^ This doesn't apply/deploy config
+
+# kustomize build k8s/ | kubectl apply -f -
+# ^ Redirect
+# output: (for nginx depl)
+# service/nginx-lb-service created
+# deplyments.app/nginx-deployment created 
+
+# kubectl apply -k k8s/
+# ^ Basically does the same
+# output: (for nginx depl)
+# service/nginx-lb-service created
+# deplyments.app/nginx-deployment created 
+
+# Delete via
+# kustomize build k8s/ | kubectl delete -f .
+# k delete -k k8s/
