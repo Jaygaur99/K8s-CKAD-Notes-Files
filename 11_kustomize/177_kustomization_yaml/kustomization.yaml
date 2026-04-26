@@ -1,0 +1,11 @@
+# Kubernates resources to be managed by kustomize
+resources: 
+  - nginx-deployment.yaml
+  - nginx-service.yaml
+
+# Customization that needs to be made
+commonLabels:
+  company: ABC
+
+# After this do 
+# $ kustomize build 176_kustomzation_yaml

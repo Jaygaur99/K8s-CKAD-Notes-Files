@@ -22,7 +22,6 @@ spec:
         image: "nginx:{{ .Values.image.tag }}"
 
 ---
-
 # values.yaml
 replicaCount: 1
 
