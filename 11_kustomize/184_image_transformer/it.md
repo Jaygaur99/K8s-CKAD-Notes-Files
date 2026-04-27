@@ -1,6 +1,5 @@
-### web-depl.yaml
-
 ```yaml
+### web-depl.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
